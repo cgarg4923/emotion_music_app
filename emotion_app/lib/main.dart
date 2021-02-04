@@ -104,40 +104,49 @@ class _MyAppState extends State<MyApp> {
                   clipBehavior: Clip.none,
                   children: [
                     ListTileTheme(
-                      tileColor: Color(0xFF274A53),
+                      //tileColor: Color(0xFF274A53),
                       contentPadding: EdgeInsets.only(left: 100, right: 5),
-                      child: ListTile(
-                        title: Text(
-                          'Style',
-                          style: TextStyle(color: Colors.white),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              i ? Colors.white : Color(0xFF284D57),
+                              i ? Colors.white : Colors.black,
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
                         ),
-                        subtitle: Text(
-                          'Taylor Swift',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        trailing: Wrap(
-                          spacing: 0, // space between two icons
-                          children: <Widget>[
-                            IconButton(
-                              icon: Icon(
-                                CupertinoIcons.suit_heart,
-                              ),
-                              onPressed: () {},
-                              color: Colors.white,
-                            ),
-                            IconButton(
-                                icon: Icon(
-                                  CupertinoIcons.smiley,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {}),
-                            IconButton(
-                                icon: Icon(
-                                  CupertinoIcons.play_fill,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {}),
-                          ],
+                        child: ListTile(
+                          title: Text(
+                            'Style',
+                            style: TextStyle(
+                                color: i ? Colors.black : Colors.white),
+                          ),
+                          subtitle: Text(
+                            'Taylor Swift',
+                            style: TextStyle(
+                                color: i ? Colors.black : Colors.white),
+                          ),
+                          trailing: Wrap(
+                            spacing: 0, // space between two icons
+                            children: <Widget>[
+                              IconButton(
+                                  icon: Icon(
+                                    CupertinoIcons.suit_heart,
+                                  ),
+                                  onPressed: () {},
+                                  color: i ? Colors.black : Colors.white),
+                              IconButton(
+                                  icon: Icon(CupertinoIcons.smiley,
+                                      color: i ? Colors.black : Colors.white),
+                                  onPressed: () {}),
+                              IconButton(
+                                  icon: Icon(CupertinoIcons.play_fill,
+                                      color: i ? Colors.black : Colors.white),
+                                  onPressed: () {}),
+                            ],
+                          ),
                         ),
                       ),
                     ),
