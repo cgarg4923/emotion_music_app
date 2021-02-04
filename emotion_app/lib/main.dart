@@ -120,7 +120,8 @@ class _MyAppState extends State<MyApp> {
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    stops: [0.0, 1.0]),
+                    stops: [0.0, 1.0],
+                  ),
           ),
           child: ListView(
             //crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,7 +134,7 @@ class _MyAppState extends State<MyApp> {
                     Text(
                       'Good Evening',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: i ? Colors.black : Colors.white,
                         fontSize: 25,
                         decoration: TextDecoration.none,
                       ),
@@ -143,7 +144,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     Icon(
                       Icons.wb_sunny_outlined,
-                      color: Colors.white,
+                      color: i ? Colors.black : Colors.white,
                       size: 25,
                     ),
                     Transform.scale(
@@ -161,7 +162,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     Icon(
                       CupertinoIcons.moon,
-                      color: Colors.white,
+                      color: i ? Colors.black : Colors.white,
                       size: 25,
                     ),
                   ],
