@@ -22,7 +22,10 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF284D57), Color(0xFF262626)],
+              colors: [
+                Color(0xFF284D57),
+                Color(0xFF262626),
+              ],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
@@ -103,26 +106,15 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Container(
           decoration: BoxDecoration(
-            gradient: i
-                ? LinearGradient(
-                    colors: [
-                      Color(0xFFF8F8F8),
-                      Colors.white,
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.0, 1.0],
-                  )
-                : LinearGradient(
-                    colors: [
-                      Color(0xFF284D57),
-                      Colors.black,
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.0, 1.0],
-                  ),
-          ),
+              gradient: LinearGradient(
+            colors: [
+              i ? Color(0xFFF8F8F8) : Color(0xFF284D57),
+              i ? Colors.white : Colors.black,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: [0.0, 1.0],
+          )),
           child: ListView(
             //crossAxisAlignment: CrossAxisAlignment.center,
             //mainAxisAlignment: MainAxisAlignment.center,
