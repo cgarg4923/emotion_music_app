@@ -22,16 +22,9 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-<<<<<<< HEAD
-              colors: [
-                Color(0xFF284D57),
-                Color(0xFF262626),
-              ],
-=======
               colors: !i
                   ? [Color(0xFF284D57), Color(0xFF262626)]
                   : [Color(0xFFFCFCFC), Color(0xFFFCFCFC)],
->>>>>>> ac7ff1575b4909d223a4347cd8b075af1485e770
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
