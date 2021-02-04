@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF284D57), Colors.black],
+              colors: [Color(0xFF284D57), Color(0xFF262626)],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),
