@@ -105,13 +105,14 @@ class _MyAppState extends State<MyApp> {
                   children: [
                     ListTileTheme(
                       //tileColor: Color(0xFF274A53),
-                      contentPadding: EdgeInsets.only(left: 100, right: 5),
+                      contentPadding: EdgeInsets.only(left: 110, right: 5),
                       child: Container(
+                        height: 70,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              i ? Colors.white : Color(0xFF284D57),
-                              i ? Colors.white : Colors.black,
+                              i ? Color(0xFFF8F8F8) : Color(0xFF284D57),
+                              i ? Color(0xFFF8F8F8) : Colors.black,
                             ],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
@@ -126,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                           subtitle: Text(
                             'Taylor Swift',
                             style: TextStyle(
-                                color: i ? Colors.black : Colors.white),
+                                color: i ? Colors.grey : Colors.blueGrey),
                           ),
                           trailing: Wrap(
                             spacing: 0, // space between two icons
@@ -154,18 +155,18 @@ class _MyAppState extends State<MyApp> {
                       left: 13,
                       bottom: 10,
                       child: Container(
-                        height: 70,
-                        width: 70,
+                        height: 80,
+                        width: 80,
                         decoration: BoxDecoration(
                           boxShadow: [
                             //color: Colors.white, //background color of box
                             //color: Colors.white,
                             BoxShadow(
-                              color: Colors.black,
+                              color: !i ? Colors.black : Colors.grey,
                               blurRadius: 4.0, // soften the shadow
                               //spreadRadius: 5.0, //extend the shadow
                               offset: Offset(
-                                2.0, // Move to right 10  horizontally
+                                1.0, // Move to right 10  horizontally
                                 1.0, // Move to bottom 10 Vertically
                               ),
                             ),
