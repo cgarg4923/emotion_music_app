@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'Bottom Nav Bar/bottom_nav_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _lights = false;
+  bool _lights = true;
   bool i = false;
   List<bool> isSelected = [true, false, false];
   @override
@@ -19,89 +20,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: !i
-                  ? [Color(0xFF284D57), Color(0xFF262626)]
-                  : [Color(0xFFFCFCFC), Color(0xFFFCFCFC)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-            ),
-          ),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7.0, vertical: 5),
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isSelected[2] = false;
-                        isSelected[0] = true;
-                        isSelected[1] = false;
-                      });
-                    },
-                    color: isSelected[0] ? Colors.pinkAccent : Colors.black,
-                    child: Icon(
-                      CupertinoIcons.house,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7, vertical: 5),
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isSelected[2] = false;
-                        isSelected[0] = false;
-                        isSelected[1] = true;
-                      });
-                    },
-                    color: isSelected[1] ? Colors.pinkAccent : Colors.black,
-                    child: Icon(
-                      CupertinoIcons.search,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7.0, vertical: 5),
-                  child: FlatButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isSelected[2] = true;
-                        isSelected[0] = false;
-                        isSelected[1] = false;
-                      });
-                    },
-                    color: isSelected[2] ? Colors.pinkAccent : Colors.black,
-                    child: Icon(
-                      CupertinoIcons.music_albums_fill,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        bottomNavigationBar: Bottom_Nav_Bar(
+          i: i,
+          isSelected: isSelected,
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -114,47 +35,139 @@ class _MyAppState extends State<MyApp> {
             end: Alignment.bottomRight,
             stops: [0.0, 1.0],
           )),
-          child: ListView(
-            //crossAxisAlignment: CrossAxisAlignment.center,
-            //mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
+              Expanded(
+                child: Container(
+                  child: ListView(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Good Evening',
+                              style: TextStyle(
+                                color: i ? Colors.black : Colors.white,
+                                fontSize: 25,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Icon(
+                              Icons.wb_sunny_outlined,
+                              color: i ? Colors.black : Colors.white,
+                              size: 25,
+                            ),
+                            Transform.scale(
+                              scale: 0.8,
+                              child: CupertinoSwitch(
+                                activeColor: Colors.grey,
+                                value: _lights,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    _lights = value;
+                                    i = !i;
+                                  });
+                                },
+                              ),
+                            ),
+                            Icon(
+                              CupertinoIcons.moon,
+                              color: i ? Colors.black : Colors.white,
+                              size: 25,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                // decoration: BoxDecoration(
+                //   gradient: LinearGradient(
+                //     colors: [
+                //       i ? Colors.black : Color(0xFF284D57),
+                //       i ? Colors.black : Colors.black,
+                //     ],
+                //     begin: Alignment.centerLeft,
+                //     end: Alignment.centerRight,
+                //   ),
+                // ),
+                child: Stack(
+                  clipBehavior: Clip.none,
                   children: [
-                    Text(
-                      'Good Evening',
-                      style: TextStyle(
-                        color: i ? Colors.black : Colors.white,
-                        fontSize: 25,
-                        decoration: TextDecoration.none,
+                    ListTileTheme(
+                      tileColor: Color(0xFF274A53),
+                      contentPadding: EdgeInsets.only(left: 100, right: 5),
+                      child: ListTile(
+                        title: Text(
+                          'Style',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          'Taylor Swift',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        trailing: Wrap(
+                          spacing: 0, // space between two icons
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(
+                                CupertinoIcons.suit_heart,
+                              ),
+                              onPressed: () {},
+                              color: Colors.white,
+                            ),
+                            IconButton(
+                                icon: Icon(
+                                  CupertinoIcons.smiley,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {}),
+                            IconButton(
+                                icon: Icon(
+                                  CupertinoIcons.play_fill,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () {}),
+                          ],
+                        ),
                       ),
                     ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    Icon(
-                      Icons.wb_sunny_outlined,
-                      color: i ? Colors.black : Colors.white,
-                      size: 25,
-                    ),
-                    Transform.scale(
-                      scale: 0.8,
-                      child: CupertinoSwitch(
-                        activeColor: Colors.grey,
-                        value: _lights,
-                        onChanged: (bool value) {
-                          setState(() {
-                            _lights = value;
-                            i = !i;
-                          });
-                        },
+                    Positioned(
+                      left: 13,
+                      bottom: 10,
+                      child: Container(
+                        height: 70,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            //color: Colors.white, //background color of box
+                            //color: Colors.white,
+                            BoxShadow(
+                              color: Colors.black,
+                              blurRadius: 4.0, // soften the shadow
+                              //spreadRadius: 5.0, //extend the shadow
+                              offset: Offset(
+                                2.0, // Move to right 10  horizontally
+                                1.0, // Move to bottom 10 Vertically
+                              ),
+                            ),
+                          ],
+                          image: DecorationImage(
+                            // fit: BoxFit.fill,
+                            image: AssetImage('images/lover.jpeg'),
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                       ),
-                    ),
-                    Icon(
-                      CupertinoIcons.moon,
-                      color: i ? Colors.black : Colors.white,
-                      size: 25,
                     ),
                   ],
                 ),
