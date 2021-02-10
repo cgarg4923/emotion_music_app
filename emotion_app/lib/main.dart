@@ -115,87 +115,73 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 84.0),
-                          child: LinearProgressIndicator(
-                            value: animation.value,
-                            minHeight: 3,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.pinkAccent),
-                            backgroundColor: Colors.white,
+                    ListTileTheme(
+                      //tileColor: Color(0xFF274A53),
+                      contentPadding: EdgeInsets.only(left: 110, right: 5),
+                      child: Container(
+                        height: 70,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              i ? Color(0xFFF8F8F8) : Color(0xFF284D57),
+                              i ? Color(0xFFF8F8F8) : Colors.black,
+                            ],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
                           ),
                         ),
-                        ListTileTheme(
-                          //tileColor: Color(0xFF274A53),
-                          contentPadding: EdgeInsets.only(left: 100, right: 5),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  i ? Color(0xFFF8F8F8) : Color(0xFF284D57),
-                                  i ? Color(0xFFF8F8F8) : Colors.black,
-                                ],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                            ),
-                            child: ListTile(
-                              title: Text(
-                                'Style',
-                                style: TextStyle(
-                                    color: i ? Colors.black : Colors.white),
-                              ),
-                              subtitle: Text(
-                                'Taylor Swift',
-                                style: TextStyle(
-                                    color: i ? Colors.grey : Colors.blueGrey),
-                              ),
-                              trailing: Wrap(
-                                spacing: 0, // space between two icons
-                                children: <Widget>[
-                                  IconButton(
-                                      icon: Icon(
-                                        CupertinoIcons.suit_heart,
-                                      ),
-                                      onPressed: () {},
+                        child: ListTile(
+                          title: Text(
+                            'Style',
+                            style: TextStyle(
+                                color: i ? Colors.black : Colors.white),
+                          ),
+                          subtitle: Text(
+                            'Taylor Swift',
+                            style: TextStyle(
+                                color: i ? Colors.grey : Colors.blueGrey),
+                          ),
+                          trailing: Wrap(
+                            spacing: 0, // space between two icons
+                            children: <Widget>[
+                              IconButton(
+                                  icon: Icon(
+                                    CupertinoIcons.suit_heart,
+                                  ),
+                                  onPressed: () {},
+                                  color: i ? Colors.black : Colors.white),
+                              IconButton(
+                                  icon: Icon(CupertinoIcons.smiley,
                                       color: i ? Colors.black : Colors.white),
-                                  IconButton(
-                                      icon: Icon(CupertinoIcons.smiley,
-                                          color:
-                                              i ? Colors.black : Colors.white),
-                                      onPressed: () {}),
-                                  IconButton(
-                                      icon: Icon(
-                                          player
-                                              ? CupertinoIcons.pause_fill
-                                              : CupertinoIcons.play_fill,
-                                          color:
-                                              i ? Colors.black : Colors.white),
-                                      onPressed: () {
-                                        setState(() {
-                                          player = !player;
-                                          if (controller.isAnimating) {
-                                            controller.stop();
-                                          } else {
-                                            controller.forward();
-                                          }
-                                        });
-                                      }),
-                                ],
+                                  onPressed: () {}),
+                              IconButton(
+                                icon: Icon(
+                                    player
+                                        ? CupertinoIcons.pause_fill
+                                        : CupertinoIcons.play_fill,
+                                    color: i ? Colors.black : Colors.white),
+                                onPressed: () {
+                                  setState(() {
+                                    player = !player;
+                                    if (controller.isAnimating) {
+                                      controller.stop();
+                                    } else {
+                                      controller.forward();
+                                    }
+                                  });
+                                },
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
                     Positioned(
                       left: 13,
                       bottom: 15,
                       child: Container(
-                        height: 70,
-                        width: 70,
+                        height: 80,
+                        width: 80,
                         decoration: BoxDecoration(
                           boxShadow: [
                             //color: Colors.white, //background color of box
