@@ -115,66 +115,81 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    ListTileTheme(
-                      //tileColor: Color(0xFF274A53),
-                      contentPadding: EdgeInsets.only(left: 110, right: 5),
-                      child: Container(
-                        height: 70,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              i ? Color(0xFFF8F8F8) : Color(0xFF284D57),
-                              i ? Color(0xFFF8F8F8) : Colors.black,
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 85.0),
+                          child: LinearProgressIndicator(
+                            minHeight: 3,
+                            value: animation.value,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.pinkAccent),
+                            backgroundColor: Colors.white,
                           ),
                         ),
-                        child: ListTile(
-                          title: Text(
-                            'Style',
-                            style: TextStyle(
-                                color: i ? Colors.black : Colors.white),
-                          ),
-                          subtitle: Text(
-                            'Taylor Swift',
-                            style: TextStyle(
-                                color: i ? Colors.grey : Colors.blueGrey),
-                          ),
-                          trailing: Wrap(
-                            spacing: 0, // space between two icons
-                            children: <Widget>[
-                              IconButton(
-                                  icon: Icon(
-                                    CupertinoIcons.suit_heart,
-                                  ),
-                                  onPressed: () {},
-                                  color: i ? Colors.black : Colors.white),
-                              IconButton(
-                                  icon: Icon(CupertinoIcons.smiley,
-                                      color: i ? Colors.black : Colors.white),
-                                  onPressed: () {}),
-                              IconButton(
-                                icon: Icon(
-                                    player
-                                        ? CupertinoIcons.pause_fill
-                                        : CupertinoIcons.play_fill,
-                                    color: i ? Colors.black : Colors.white),
-                                onPressed: () {
-                                  setState(() {
-                                    player = !player;
-                                    if (controller.isAnimating) {
-                                      controller.stop();
-                                    } else {
-                                      controller.forward();
-                                    }
-                                  });
-                                },
+                        ListTileTheme(
+                          //tileColor: Color(0xFF274A53),
+                          contentPadding: EdgeInsets.only(left: 110, right: 5),
+                          child: Container(
+                            height: 70,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  i ? Color(0xFFF8F8F8) : Color(0xFF284D57),
+                                  i ? Color(0xFFF8F8F8) : Colors.black,
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
                               ),
-                            ],
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                'Style',
+                                style: TextStyle(
+                                    color: i ? Colors.black : Colors.white),
+                              ),
+                              subtitle: Text(
+                                'Taylor Swift',
+                                style: TextStyle(
+                                    color: i ? Colors.grey : Colors.blueGrey),
+                              ),
+                              trailing: Wrap(
+                                spacing: 0, // space between two icons
+                                children: <Widget>[
+                                  IconButton(
+                                      icon: Icon(
+                                        CupertinoIcons.suit_heart,
+                                      ),
+                                      onPressed: () {},
+                                      color: i ? Colors.black : Colors.white),
+                                  IconButton(
+                                      icon: Icon(CupertinoIcons.smiley,
+                                          color:
+                                              i ? Colors.black : Colors.white),
+                                      onPressed: () {}),
+                                  IconButton(
+                                    icon: Icon(
+                                        player
+                                            ? CupertinoIcons.pause_fill
+                                            : CupertinoIcons.play_fill,
+                                        color: i ? Colors.black : Colors.white),
+                                    onPressed: () {
+                                      setState(() {
+                                        player = !player;
+                                        if (controller.isAnimating) {
+                                          controller.stop();
+                                        } else {
+                                          controller.forward();
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     Positioned(
                       left: 13,
