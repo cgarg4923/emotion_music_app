@@ -11,9 +11,31 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+      duration: Duration(seconds: 180),
+      vsync: this,
+    );
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.decelerate,
+    );
+    //controller.forward();
+    animation.addListener(() {
+      setState(() {});
+    });
+  }
+
   bool _lights = true;
   bool i = false;
+  bool player = false;
   List<bool> isSelected = [true, false, false];
   @override
   Widget build(BuildContext context) {
@@ -90,69 +112,87 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               Container(
-                // decoration: BoxDecoration(
-                //   gradient: LinearGradient(
-                //     colors: [
-                //       i ? Colors.black : Color(0xFF284D57),
-                //       i ? Colors.black : Colors.black,
-                //     ],
-                //     begin: Alignment.centerLeft,
-                //     end: Alignment.centerRight,
-                //   ),
-                // ),
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    ListTileTheme(
-                      //tileColor: Color(0xFF274A53),
-                      contentPadding: EdgeInsets.only(left: 100, right: 5),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              i ? Colors.white : Color(0xFF284D57),
-                              i ? Colors.white : Colors.black,
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 84.0),
+                          child: LinearProgressIndicator(
+                            value: animation.value,
+                            minHeight: 3,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.pinkAccent),
+                            backgroundColor: Colors.white,
                           ),
                         ),
-                        child: ListTile(
-                          title: Text(
-                            'Style',
-                            style: TextStyle(
-                                color: i ? Colors.black : Colors.white),
-                          ),
-                          subtitle: Text(
-                            'Taylor Swift',
-                            style: TextStyle(
-                                color: i ? Colors.black : Colors.white),
-                          ),
-                          trailing: Wrap(
-                            spacing: 0, // space between two icons
-                            children: <Widget>[
-                              IconButton(
-                                  icon: Icon(
-                                    CupertinoIcons.suit_heart,
-                                  ),
-                                  onPressed: () {},
-                                  color: i ? Colors.black : Colors.white),
-                              IconButton(
-                                  icon: Icon(CupertinoIcons.smiley,
+                        ListTileTheme(
+                          //tileColor: Color(0xFF274A53),
+                          contentPadding: EdgeInsets.only(left: 100, right: 5),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  i ? Color(0xFFF8F8F8) : Color(0xFF284D57),
+                                  i ? Color(0xFFF8F8F8) : Colors.black,
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                'Style',
+                                style: TextStyle(
+                                    color: i ? Colors.black : Colors.white),
+                              ),
+                              subtitle: Text(
+                                'Taylor Swift',
+                                style: TextStyle(
+                                    color: i ? Colors.grey : Colors.blueGrey),
+                              ),
+                              trailing: Wrap(
+                                spacing: 0, // space between two icons
+                                children: <Widget>[
+                                  IconButton(
+                                      icon: Icon(
+                                        CupertinoIcons.suit_heart,
+                                      ),
+                                      onPressed: () {},
                                       color: i ? Colors.black : Colors.white),
-                                  onPressed: () {}),
-                              IconButton(
-                                  icon: Icon(CupertinoIcons.play_fill,
-                                      color: i ? Colors.black : Colors.white),
-                                  onPressed: () {}),
-                            ],
+                                  IconButton(
+                                      icon: Icon(CupertinoIcons.smiley,
+                                          color:
+                                              i ? Colors.black : Colors.white),
+                                      onPressed: () {}),
+                                  IconButton(
+                                      icon: Icon(
+                                          player
+                                              ? CupertinoIcons.pause_fill
+                                              : CupertinoIcons.play_fill,
+                                          color:
+                                              i ? Colors.black : Colors.white),
+                                      onPressed: () {
+                                        setState(() {
+                                          player = !player;
+                                          if (controller.isAnimating) {
+                                            controller.stop();
+                                          } else {
+                                            controller.forward();
+                                          }
+                                        });
+                                      }),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                     Positioned(
                       left: 13,
-                      bottom: 10,
+                      bottom: 15,
                       child: Container(
                         height: 70,
                         width: 70,
@@ -161,18 +201,20 @@ class _MyAppState extends State<MyApp> {
                             //color: Colors.white, //background color of box
                             //color: Colors.white,
                             BoxShadow(
-                              color: Colors.black,
+                              color: !i ? Colors.black : Colors.grey,
                               blurRadius: 4.0, // soften the shadow
                               //spreadRadius: 5.0, //extend the shadow
                               offset: Offset(
-                                2.0, // Move to right 10  horizontally
+                                1.0, // Move to right 10  horizontally
                                 1.0, // Move to bottom 10 Vertically
                               ),
                             ),
                           ],
                           image: DecorationImage(
                             // fit: BoxFit.fill,
-                            image: AssetImage('images/lover.jpeg'),
+                            image: AssetImage(
+                              'images/lover.jpeg',
+                            ),
                           ),
                           borderRadius: BorderRadius.circular(5),
                         ),

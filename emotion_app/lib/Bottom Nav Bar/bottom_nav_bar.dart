@@ -40,7 +40,11 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
                   widget.isSelected[1] = false;
                 });
               },
-              color: widget.isSelected[0] ? Colors.pinkAccent : Colors.black,
+              color: widget.isSelected[0]
+                  ? Colors.pinkAccent
+                  : !widget.i
+                      ? Colors.black
+                      : Colors.grey,
               child: Icon(
                 CupertinoIcons.house,
                 color: Colors.white,
@@ -61,7 +65,11 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
                   widget.isSelected[1] = true;
                 });
               },
-              color: widget.isSelected[1] ? Colors.pinkAccent : Colors.black,
+              color: widget.isSelected[1]
+                  ? Colors.pinkAccent
+                  : !widget.i
+                      ? Colors.black
+                      : Colors.grey,
               child: Icon(
                 CupertinoIcons.search,
                 color: Colors.white,
@@ -82,7 +90,11 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
                   widget.isSelected[1] = false;
                 });
               },
-              color: widget.isSelected[2] ? Colors.pinkAccent : Colors.black,
+              color: widget.isSelected[2]
+                  ? Colors.pinkAccent
+                  : !widget.i
+                      ? Colors.black
+                      : Colors.grey,
               child: Icon(
                 CupertinoIcons.music_albums_fill,
                 color: Colors.white,
