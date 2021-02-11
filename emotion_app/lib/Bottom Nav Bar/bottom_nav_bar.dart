@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:emotion_app/PlayerPage/player.dart';
 
 class Bottom_Nav_Bar extends StatefulWidget {
   bool i;
@@ -89,6 +90,8 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
                   widget.isSelected[0] = false;
                   widget.isSelected[1] = false;
                 });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyPlayer()));
               },
               color: widget.isSelected[2]
                   ? Colors.pinkAccent

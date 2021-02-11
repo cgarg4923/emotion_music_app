@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'Bottom Nav Bar/bottom_nav_bar.dart';
+import 'PlayerPage/player.dart';
 
 void main() {
   runApp(MyApp());

@@ -28,8 +28,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   assets_audio_player: ^2.0.13+8
- 
-  
+  audio_session: ^0.0.11
+  rxdart: ">= 0.24.1 < 0.26.0"
+  just_audio:
 
 dev_dependencies:
   flutter_test:
