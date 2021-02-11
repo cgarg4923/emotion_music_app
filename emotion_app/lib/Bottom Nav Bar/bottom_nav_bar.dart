@@ -5,6 +5,7 @@ import 'package:emotion_app/PlayerPage/player.dart';
 class Bottom_Nav_Bar extends StatefulWidget {
   bool i;
   List<bool> isSelected;
+
   Bottom_Nav_Bar({this.i, this.isSelected});
 
   @override

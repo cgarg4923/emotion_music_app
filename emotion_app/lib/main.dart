@@ -29,19 +29,6 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     super.initState();
     _player = AudioPlayer();
 
-    controller = AnimationController(
-      duration: Duration(seconds: 221),
-      vsync: this,
-    );
-    animation = CurvedAnimation(
-      parent: controller,
-      curve: Curves.decelerate,
-    );
-
-    //controller.forward();
-    animation.addListener(() {
-      setState(() {});
-    });
     _init();
   }
 
@@ -51,6 +38,22 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     try {
       await _player.setUrl(
           'https://aac.saavncdn.com/228/dedf9c831393db35bae0fbb1b65776d0_320.mp4');
+
+      print("dura : " + _player.duration.toString() + '\n');
+      int time = await _player.duration.inSeconds.toInt();
+      controller = AnimationController(
+        duration: Duration(seconds: time),
+        vsync: this,
+      );
+      animation = CurvedAnimation(
+        parent: controller,
+        curve: Curves.decelerate,
+      );
+
+      //controller.forward();
+      animation.addListener(() {
+        setState(() {});
+      });
     } catch (e) {
       // catch load errors: 404, invalid url ...
       print("An error occured $e");
@@ -201,11 +204,11 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                                       setState(() {
                                         player = !player;
                                         if (controller.isAnimating) {
-                                          controller.stop();
                                           _player.pause();
+                                          controller.stop();
                                         } else {
-                                          controller.forward();
                                           _player.play();
+                                          controller.forward();
                                         }
                                       });
                                     },
