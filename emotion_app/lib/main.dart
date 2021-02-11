@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'Bottom Nav Bar/bottom_nav_bar.dart';
-import 'PlayerPage/player.dart';
+//import 'PlayerPage/player.dart';
+import 'dart:math';
+import 'package:audio_session/audio_session.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:rxdart/rxdart.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,24 +21,40 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   AnimationController controller;
+  AudioPlayer _player;
   Animation animation;
 
   @override
   void initState() {
     super.initState();
+    _player = AudioPlayer();
 
     controller = AnimationController(
-      duration: Duration(seconds: 180),
+      duration: Duration(seconds: 221),
       vsync: this,
     );
     animation = CurvedAnimation(
       parent: controller,
       curve: Curves.decelerate,
     );
+
     //controller.forward();
     animation.addListener(() {
       setState(() {});
     });
+    _init();
+  }
+
+  _init() async {
+    final session = await AudioSession.instance;
+    await session.configure(AudioSessionConfiguration.speech());
+    try {
+      await _player.setUrl(
+          'https://aac.saavncdn.com/228/dedf9c831393db35bae0fbb1b65776d0_320.mp4');
+    } catch (e) {
+      // catch load errors: 404, invalid url ...
+      print("An error occured $e");
+    }
   }
 
   bool _lights = true;
@@ -179,8 +202,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                                         player = !player;
                                         if (controller.isAnimating) {
                                           controller.stop();
+                                          _player.pause();
                                         } else {
                                           controller.forward();
+                                          _player.play();
                                         }
                                       });
                                     },
