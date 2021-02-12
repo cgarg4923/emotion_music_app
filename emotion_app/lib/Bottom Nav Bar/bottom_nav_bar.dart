@@ -73,7 +73,7 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
                       ? Colors.black
                       : Colors.grey,
               child: Icon(
-                CupertinoIcons.search,
+                CupertinoIcons.person_alt_circle_fill,
                 color: Colors.white,
               ),
             ),
@@ -91,8 +91,8 @@ class _Bottom_Nav_BarState extends State<Bottom_Nav_Bar> {
                   widget.isSelected[0] = false;
                   widget.isSelected[1] = false;
                 });
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MyPlayer()));
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => MyPlayer()));
               },
               color: widget.isSelected[2]
                   ? Colors.pinkAccent

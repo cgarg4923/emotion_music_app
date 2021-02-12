@@ -171,7 +171,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                             ),
                             child: ListTile(
                               title: Text(
-                                'Style',
+                                'Lover',
                                 style: TextStyle(
                                     color: i ? Colors.black : Colors.white),
                               ),
@@ -185,15 +185,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                                 children: <Widget>[
                                   IconButton(
                                       icon: Icon(
-                                        CupertinoIcons.suit_heart,
+                                        CupertinoIcons.backward_end,
                                       ),
                                       onPressed: () {},
                                       color: i ? Colors.black : Colors.white),
-                                  IconButton(
-                                      icon: Icon(CupertinoIcons.smiley,
-                                          color:
-                                              i ? Colors.black : Colors.white),
-                                      onPressed: () {}),
                                   IconButton(
                                     icon: Icon(
                                         player
@@ -213,6 +208,11 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                                       });
                                     },
                                   ),
+                                  IconButton(
+                                      icon: Icon(CupertinoIcons.forward_end,
+                                          color:
+                                              i ? Colors.black : Colors.white),
+                                      onPressed: () {}),
                                 ],
                               ),
                             ),
@@ -259,4 +259,13 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       ),
     );
   }
+}
+
+//METADATA
+class AudioMetadata {
+  final String album;
+  final String title;
+  final String artwork;
+
+  AudioMetadata({this.album, this.title, this.artwork});
 }
